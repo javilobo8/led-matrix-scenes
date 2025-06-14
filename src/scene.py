@@ -18,10 +18,7 @@ class Scene:
         for el in self.elements:
             el.render(canvas, timestamp)
 
-def load_scenes_from_json(path):
-    with open(path) as f:
-        data = json.load(f)
-
+def _load_scenes_from_data(data):
     scenes = []
     for scene_data in data:
         elements = []
@@ -31,7 +28,7 @@ def load_scenes_from_json(path):
             elif el["type"] == "Notification":
                 elements.append(Notification(el["text"], el["x"], el["y"], el["color"], el.get("font", "6x10"), el.get("outline", None), el.get("notification_color")))
             elif el["type"] == "ScrollingText":
-                elements.append(ScrollingText(el["text"], el["y"], el["color"], el.get("font", "6x10"), el.get("speed", 1)))
+                elements.append(ScrollingText(el["text"], el["y"], el["color"], el.get("font", "6x10"), el.get("speed", 1), el.get("x_start"), el.get("x_end"), el.get("pause_time")))
             elif el["type"] == "Image":
                 elements.append(ImageElement(el["path"], el.get("x", 0), el.get("y", 0), el.get("width", 128), el.get("height", 128)))
             elif el["type"] == "Video":
@@ -43,5 +40,13 @@ def load_scenes_from_json(path):
             elif el["type"] == "CountDown":
                 elements.append(CountDown(el["x"], el["y"], el["color"], el.get("font", "6x10"), el.get("outline", None), el.get("target")))
         scenes.append(Scene(scene_data["duration"], elements))
-
     return scenes
+
+def load_scenes_from_json(path):
+    with open(path) as f:
+        data = json.load(f)
+    return _load_scenes_from_data(data)
+
+def load_scenes_from_dict(data):
+    # Espera que `data` sea una lista de escenas, como en el JSON
+    return _load_scenes_from_data(data)
