@@ -2,7 +2,7 @@ from PIL import Image
 from renderables.base import Renderable
 
 class ImageElement(Renderable):
-    def __init__(self, path, x=0, y=0, width=100, height=100):
+    def __init__(self, path, x=0, y=0, width=None, height=None):
         self.image = Image.open(path).convert("RGB")
         self.x = x
         self.y = y
@@ -10,7 +10,7 @@ class ImageElement(Renderable):
         self.height = height
 
         if self.width is not None and self.height is not None:
-            self.image = self.image.resize((self.width, self.height), Image.Resampling.BILINEAR)
+            self.image = self.image.resize((self.width, self.height), Image.Resampling.NEAREST)
 
     def render(self, canvas, timestamp):
         canvas.SetImage(self.image, self.x, self.y)

@@ -26,14 +26,6 @@
         "font": "src/assets/fonts/6x10.bdf"
       },
       {
-        "type": "Image",
-        "path": "src/assets/gta-logo-128.png",
-        "x": -4,
-        "y": 32,
-        "width": 64,
-        "height": 64
-      },
-      {
         "type": "ScrollingText",
         "text": "Test",
         "y": 64,
@@ -72,7 +64,13 @@
         "color": "#00FF00",
         "font": "src/assets/fonts/6x10.bdf",
         "speed": 2
-      }
+      },
+      {
+        "type": "DigitalClock",
+        "x": 43,
+        "y": 93,
+        "color": "#FF0000"
+      },
     ]
   },
   {

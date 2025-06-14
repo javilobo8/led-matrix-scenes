@@ -21,7 +21,7 @@ def main():
 
     scenes = load_scenes_from_json(args.config)
     manager = SceneManager(scenes)
-    manager.run(matrix, fps=120)
+    manager.run(matrix, fps=30)
 
 if __name__ == "__main__":
     main()
